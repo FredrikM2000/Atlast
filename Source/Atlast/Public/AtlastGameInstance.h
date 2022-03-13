@@ -14,4 +14,7 @@ class ATLAST_API UAtlastGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
 	
+public:
+	UPROPERTY(BlueprintReadWrite)
+	bool bShowClickToStart{ true };
 };
