@@ -6,6 +6,7 @@
 #include "GameFramework/Pawn.h"
 #include "PlayerPawn.generated.h"
 
+
 UCLASS()
 class ATLAST_API APlayerPawn : public APawn
 {
@@ -26,6 +27,8 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void Click();
+
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 		class USceneComponent* Root{ nullptr };
@@ -34,6 +37,7 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 		class UCameraComponent* Camera{ nullptr };
 
+	class AAtlastGameModeBase* CurrentGameMode;
 
 	FHitResult RayTracer(float range);
 };

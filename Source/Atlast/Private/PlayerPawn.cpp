@@ -4,6 +4,8 @@
 #include "PlayerPawn.h"
 #include "Components/SceneComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "Atlast/AtlastGameModeBase.h"
 #include "Camera/CameraComponent.h"
 #include "DrawDebugHelpers.h"
 
@@ -28,28 +30,33 @@ APlayerPawn::APlayerPawn()
 void APlayerPawn::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	CurrentGameMode = Cast<AAtlastGameModeBase>(UGameplayStatics::GetGameMode(this));
 }
 
 // Called every frame
 void APlayerPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
 }
 
 // Called to bind functionality to input
 void APlayerPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	PlayerInputComponent->BindAction(TEXT("LeftClick"), IE_Pressed, this, &APlayerPawn::Click);
+}
 
+void APlayerPawn::Click()
+{
+	CurrentGameMode->ClickAnywhere(1);
 }
 
 FHitResult APlayerPawn::RayTracer(float range)
 {
 	FHitResult Hit;
 	FCollisionQueryParams TraceParams(FName(TEXT("")), false, this);
-
+	
 	GetWorld()->LineTraceSingleByChannel(
 		Hit,
 		Camera->GetComponentLocation(),
