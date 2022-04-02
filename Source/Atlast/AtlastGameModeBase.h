@@ -21,6 +21,8 @@ protected:
 	virtual void BeginPlay() override;
 
 	TArray<AActor*> AchievementSystem;
+	TArray<AActor*> AllCountries;
+	TArray<AActor*> AllLandmarks;
 
 public:
 	// Called every frame
@@ -28,4 +30,5 @@ public:
 
 	void ClickAnywhere(int Clicks);
 
+	void CountryClicked(class ACountry* SelectedCountry, class ALandmark* SelectedLandmark = nullptr);
 };

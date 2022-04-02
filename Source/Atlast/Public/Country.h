@@ -23,7 +23,13 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	bool Highlighted = false;
+
+	void Clicked(class ALandmark* SelectedLandmark = nullptr);
+	
+	class AAtlastGameModeBase* CurrentGameMode;
+
 private:
 	UPROPERTY(VisibleAnywhere)
-		UStaticMeshComponent* Land;
+	UStaticMeshComponent* Land;
 };
