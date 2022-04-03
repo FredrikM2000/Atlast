@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "Internationalization/Text.h"
 #include "AtlastGameModeBase.generated.h"
 
 /**
@@ -29,6 +30,15 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	void ClickAnywhere(int Clicks);
+
+	UFUNCTION(BlueprintCallable)
+	FText GetAchievementName(int32 Index);
+
+	UFUNCTION(BlueprintCallable)
+	FText GetDescriptionName(int32 Index);
+
+	UFUNCTION(BlueprintCallable)
+	float GetAchievementProgress(int32 Index);
 
 	void CountryClicked(class ACountry* SelectedCountry, class ALandmark* SelectedLandmark = nullptr);
 };

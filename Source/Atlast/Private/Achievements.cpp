@@ -15,8 +15,25 @@ AAchievements::AAchievements()
 void AAchievements::BeginPlay()
 {
 	Super::BeginPlay();
-	AllAchievements.push_back(new IncrementAchievement("Clicker 1", "Clicked 10 times.", 1, 10, "Click Anywhere"));
-	
+	AllAchievements.Emplace(new FIncrementAchievement(FText::FromString(TEXT("Clicker 1")), FText::FromString(TEXT("Clicked 10 times.")), 1, 10, FString(TEXT("Click Anywhere"))));
+}
+
+FText AAchievements::GetAchievementName(int32 Index)
+{
+	return AllAchievements[Index]->AchievementName;
+}
+
+FText AAchievements::GetAchievementDescription(int32 Index)
+{
+	return AllAchievements[Index]->AchievementDescription;
+}
+
+float AAchievements::GetAchievementProgress(int32 Index)
+{
+	if (static_cast<FIncrementAchievement*>(AllAchievements[Index]) != nullptr) {
+		return ((static_cast<FIncrementAchievement*>(AllAchievements[Index])->AchievementCurrentNumber) / (static_cast<FIncrementAchievement*>(AllAchievements[Index])->AchievementTargetNumber));
+	}
+	return 0.0f;
 }
 
 // Called every frame
@@ -27,9 +44,9 @@ void AAchievements::Tick(float DeltaTime)
 
 void AAchievements::ClickAnywhere(int Clicks)
 {
-	for (int i = 0; i < AllAchievements.size(); i++) {
+	for (int i = 0; i < AllAchievements.Num(); i++) {
 		if (AllAchievements[i]->AchievementType == "Click Anywhere") {
-			static_cast<IncrementAchievement*>(AllAchievements[i])->IncrementNumber(Clicks);
+			static_cast<FIncrementAchievement*>(AllAchievements[i])->IncrementNumber(Clicks);
 		}
 	}
 }

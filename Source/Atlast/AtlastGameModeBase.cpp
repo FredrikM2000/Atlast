@@ -33,6 +33,21 @@ void AAtlastGameModeBase::ClickAnywhere(int Clicks)
 	static_cast<AAchievements*>(AchievementSystem[0])->ClickAnywhere(Clicks);
 }
 
+FText AAtlastGameModeBase::GetAchievementName(int32 Index)
+{
+	return static_cast<AAchievements*>(AchievementSystem[0])->GetAchievementName(Index);
+}
+
+FText AAtlastGameModeBase::GetDescriptionName(int32 Index)
+{
+	return static_cast<AAchievements*>(AchievementSystem[0])->GetAchievementDescription(Index);
+}
+
+float AAtlastGameModeBase::GetAchievementProgress(int32 Index)
+{
+	return static_cast<AAchievements*>(AchievementSystem[0])->GetAchievementProgress(Index);
+}
+
 void AAtlastGameModeBase::CountryClicked(ACountry* SelectedCountry, ALandmark* SelectedLandmark)
 {
 	for (int i = 0; i < AllCountries.Num(); i++) {

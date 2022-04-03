@@ -3,27 +3,42 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include <string>
+#include "Containers/UnrealString.h"
 #include <vector>
+#include "Internationalization/Text.h"
 #include "GameFramework/Actor.h"
+#include "UObject/Class.h"
 #include "Achievements.generated.h"
 
-struct CoreAchievement {
-	std::string AchievementName = "ACHIEVEMENT_NAME_HERE";
-	std::string AchievementDescription = "ACHIEVEMENT_DESCRIPTION_HERE";
+USTRUCT(BlueprintType)
+ struct FCoreAchievement {
+	GENERATED_BODY()
+public:
+	UPROPERTY(BlueprintReadOnly)
+	FText AchievementName = FText::FromString(TEXT("ACHIEVEMENT_NAME_HERE"));
+	UPROPERTY(BlueprintReadOnly)
+	FText AchievementDescription = FText::FromString(TEXT("ACHIEVEMENT_DESCRIPTION_HERE"));
+	UPROPERTY(BlueprintReadOnly)
 	bool AchievementUnlocked = false;
+	UPROPERTY(BlueprintReadOnly)
 	int AchievementNumber = 0;
-	std::string AchievementType = "ACHIEVEMENT_TYPE_HERE";
+	FString AchievementType = FString(TEXT("ACHIEVEMENT_TYPE_HERE"));
 	void UnlockAchievement() {
 		AchievementUnlocked = true;
 		UE_LOG(LogTemp, Warning, TEXT("Achievement unlocked!"));
 	}
 };
 
-struct IncrementAchievement : CoreAchievement {
+USTRUCT(BlueprintType)
+struct FIncrementAchievement : public FCoreAchievement {
+	GENERATED_BODY()
+public:
+	UPROPERTY(BlueprintReadOnly)
 	int AchievementCurrentNumber = 0;
+	UPROPERTY(BlueprintReadOnly)
 	int AchievementTargetNumber = 1;
-	IncrementAchievement(std::string name, std::string desc, int number, int target, std::string type) {
+	FIncrementAchievement(){}
+	FIncrementAchievement(FText name, FText desc, int number, int target, FString type) {
 		AchievementName = name;
 		AchievementDescription = desc;
 		AchievementNumber = number;
@@ -54,12 +69,15 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	std::vector<CoreAchievement*> AllAchievements;
+public:
+	TArray<FCoreAchievement*> AllAchievements;
 
-public:	
+	FText GetAchievementName(int32 Index);
+	FText GetAchievementDescription(int32 Index);
+	float GetAchievementProgress(int32 Index);
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	void ClickAnywhere(int Clicks);
-
 };
