@@ -2,6 +2,9 @@
 
 
 #include "Country.h"
+#include "Atlast/AtlastGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
+#include "Landmark.h"
 #include "Components/StaticMeshComponent.h"
 
 // Sets default values
@@ -18,7 +21,7 @@ ACountry::ACountry()
 void ACountry::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	CurrentGameMode = Cast<AAtlastGameModeBase>(UGameplayStatics::GetGameMode(this));
 }
 
 // Called every frame
@@ -28,3 +31,15 @@ void ACountry::Tick(float DeltaTime)
 
 }
 
+void ACountry::Clicked(ALandmark* SelectedLandmark)
+{
+	if (Highlighted) {
+		//Bring up an information menu perhaps?
+	}
+	else {
+		Highlighted = true;
+		if (CurrentGameMode) {
+			CurrentGameMode->CountryClicked(this);
+		}
+	}
+}
