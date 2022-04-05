@@ -32,14 +32,14 @@ public:
 //	UPROPERTY(EditAnywhere, Category = "Information")
 //	class UImage* Photo;
 	UPROPERTY(EditAnywhere, Category = "Information")
-	ACountry* AssociatedCountry;
+	ACountry* AssociatedCountry{ nullptr };
 
 	void Clicked();
 	bool Highlighted = false;
 
 private:
-	UPROPERTY(VisibleAnywhere)
-	UStaticMeshComponent* BaseMesh;
+	//UPROPERTY(VisibleAnywhere)
+	//UStaticMeshComponent* BaseMesh;
 
 	bool CountryHighlighted = false;
 
