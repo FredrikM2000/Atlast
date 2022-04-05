@@ -42,13 +42,12 @@ public:
 		AchievementName = name;
 		AchievementDescription = desc;
 		AchievementNumber = number;
-		AchievementTargetNumber = 10;
+		AchievementTargetNumber = target;
 		AchievementType = type;
 	}
 	void IncrementNumber(int count) {
 		AchievementCurrentNumber += count;
 		if (!AchievementUnlocked) {
-			UE_LOG(LogTemp, Warning, TEXT("Progress"));
 			if (AchievementCurrentNumber >= AchievementTargetNumber) {
 				UnlockAchievement();
 			}
