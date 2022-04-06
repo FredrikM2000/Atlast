@@ -50,19 +50,19 @@ float AAtlastGameModeBase::GetAchievementProgress(int32 Index)
 
 void AAtlastGameModeBase::CountryClicked(ACountry* SelectedCountry, ALandmark* SelectedLandmark)
 {
-	for (int i = 0; i < AllCountries.Num(); i++) {
-		if (static_cast<ACountry*>(AllCountries[i]) != SelectedCountry) {
-			static_cast<ACountry*>(AllCountries[i])->Highlighted = false;
-		}
-	}
-	for (int i = 0; i < AllLandmarks.Num(); i++) {
-		if (SelectedLandmark) {
-			if (static_cast<ALandmark*>(AllLandmarks[i]) != SelectedLandmark) {
-				static_cast<ALandmark*>(AllLandmarks[i])->Highlighted = false;
-			}
-		}
-		else {
-			static_cast<ALandmark*>(AllLandmarks[i])->Highlighted = false;
-		}
-	}
+	//for (int i = 0; i < AllCountries.Num(); i++) {
+	//	if (static_cast<ACountry*>(AllCountries[i]) != SelectedCountry) {
+	//		static_cast<ACountry*>(AllCountries[i])->Highlighted = false;
+	//	}
+	//}
+	//for (int i = 0; i < AllLandmarks.Num(); i++) {
+	//	if (SelectedLandmark) {
+	//		if (static_cast<ALandmark*>(AllLandmarks[i]) != SelectedLandmark) {
+	//			static_cast<ALandmark*>(AllLandmarks[i])->Highlighted = false;
+	//		}
+	//	}
+	//	else {
+	//		static_cast<ALandmark*>(AllLandmarks[i])->Highlighted = false;
+	//	}
+	//}
 }
