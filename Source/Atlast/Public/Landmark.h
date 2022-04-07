@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/Image.h"
+//#include "Components/Image.h"
 #include "Country.h"
 #include "GameFramework/Actor.h"
 #include "Landmark.generated.h"
