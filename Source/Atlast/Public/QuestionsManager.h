@@ -8,23 +8,52 @@
 #include "GameFramework/Actor.h"
 #include "QuestionsManager.generated.h"
 
-struct QuestionBase {
-	std::string AssociatedCountry = "INSERT_COUNTRY_HERE";
+USTRUCT(BlueprintType)
+struct FQuestion {
+	GENERATED_BODY()
+public:
+	FQuestion() {}
+	~FQuestion() {}
+	UPROPERTY(BlueprintReadOnly)
+	FText AssociatedCountry = FText::FromString(TEXT("INSERT_COUNTRY_HERE"));
+
 	int32 Difficulty = 0;
-	std::string QuestionBody = "INSERT_QUESTION_BODY_HERE";
-	std::string IfCorrect = "INSERT_ADDITIONAL_INFORMATION_HERE";
-	std::string IfWrong = "INSERT_WRONG_MESSAGE_HERE";
+
+	UPROPERTY(BlueprintReadOnly)
+	FText QuestionBody = FText::FromString(TEXT("INSERT_QUESTION_BODY_HERE"));
+
+	UPROPERTY(BlueprintReadOnly)
+	FText IfCorrect = FText::FromString(TEXT("INSERT_ADDITIONAL_INFORMATION_HERE"));
+
+	UPROPERTY(BlueprintReadOnly)
+	FText IfWrong = FText::FromString(TEXT("INSERT_WRONG_MESSAGE_HERE"));
+
+	UPROPERTY(BlueprintReadOnly)
+	TArray<FText> PossibleAnswers{ FText::FromString(TEXT("INSERT_QUESTION_ANSWERS_HERE")) };
+
+	UPROPERTY(BlueprintReadOnly)
+	FText Answer1 = FText::FromString(TEXT("INSERT_ANSWER1_HERE"));
+
+	UPROPERTY(BlueprintReadOnly)
+	FText Answer2 = FText::FromString(TEXT("INSERT_ANSWER2_HERE"));
+
+	UPROPERTY(BlueprintReadOnly)
+	FText Answer3 = FText::FromString(TEXT("INSERT_ANSWER3_HERE"));
+
+	UPROPERTY(BlueprintReadOnly)
+	FText Answer4 = FText::FromString(TEXT("INSERT_ANSWER4_HERE"));
+
 	bool IsLandmarkQuestion = false;
 	bool HasSeenBefore = false;
 	bool HasAnsweredCorrectBefore = false;
-};
-
-struct MultipleChoiceQuestion : QuestionBase {
-	std::vector<std::string> PossibleAnswers;
-	int32 CorrectAnswer;
-	MultipleChoiceQuestion(std::string Question, std::vector<std::string> Answers, int32 Correct, std::string Country, std::string Congrats, std::string Sorry, int32 Challenge, bool LandmarkQuestion) {
+	int32 CorrectAnswer = 0;
+	FQuestion(FText Question, TArray<FText> Answers, int32 Correct, FText Country, FText Congrats, FText Sorry, int32 Challenge, bool LandmarkQuestion) {
 		QuestionBody = Question;
 		PossibleAnswers = Answers;
+		Answer1 = FText::FromString(TEXT("INSERT_ANSWER1_HERE"));
+		Answer2 = FText::FromString(TEXT("INSERT_ANSWER2_HERE"));
+		Answer3 = FText::FromString(TEXT("INSERT_ANSWER3_HERE"));
+		Answer4 = FText::FromString(TEXT("INSERT_ANSWER4_HERE"));
 		CorrectAnswer = Correct;
 		AssociatedCountry = Country;
 		IfCorrect = Congrats;
@@ -32,7 +61,6 @@ struct MultipleChoiceQuestion : QuestionBase {
 		Difficulty = Challenge;
 		IsLandmarkQuestion = LandmarkQuestion;
 	}
-
 	void AnswerQuestion(int32 AnswerRecieved) {
 		if (AnswerRecieved == CorrectAnswer) {
 			HasAnsweredCorrectBefore = true;
@@ -54,15 +82,14 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	std::vector<QuestionBase*> AllQuestions;
-	std::vector<QuestionBase*> NorwayQuestions;
-	std::vector<QuestionBase*> SwedenQuestions;
-	std::vector<QuestionBase*> DenmarkQuestions;
-	std::vector<QuestionBase*> FinlandQuestions;
-	std::vector<QuestionBase*> IcelandQuestions;
+	
 
 public:
+	TArray<FQuestion*> AllQuestions{ nullptr };
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	FText GetQuestionBody(int32 Index);
+	FText GetAnswerOption(int32 Index, int32 AnswerIndex);
 };

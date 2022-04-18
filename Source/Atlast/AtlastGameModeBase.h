@@ -22,6 +22,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	TArray<AActor*> AchievementSystem;
+	TArray<AActor*> QuestionsManager;
 	TArray<AActor*> AllCountries;
 	TArray<AActor*> AllLandmarks;
 
@@ -39,6 +40,12 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	float GetAchievementProgress(int32 Index);
+
+	UFUNCTION(BlueprintCallable)
+	FText GetQuestionBody(int32 Index);
+
+	UFUNCTION(BlueprintCallable)
+	FText GetAnswerOption(int32 QuestionIndex, int32 AnswerIndex);
 
 	void CountryClicked(class ACountry* SelectedCountry, class ALandmark* SelectedLandmark = nullptr);
 };

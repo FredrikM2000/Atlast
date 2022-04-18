@@ -15,24 +15,32 @@ AQuestionsManager::AQuestionsManager()
 void AQuestionsManager::BeginPlay()
 {
 	Super::BeginPlay();
-	AllQuestions.push_back(new MultipleChoiceQuestion("What is the main capital of Norway?", std::vector<std::string>{"Bergen", "Oslo", "Trondheim", "Helsinki"}, 1, "Norway", "That's right!", "Sorry, that's not correct.", 0, false));
-	for (int i = 0; i < AllQuestions.size(); i++) {
-		if (AllQuestions[i]->AssociatedCountry == "Norway") {
-			NorwayQuestions.push_back(AllQuestions[i]);
-		}
-		if (AllQuestions[i]->AssociatedCountry == "Sweden") {
-			SwedenQuestions.push_back(AllQuestions[i]);
-		}
-		if (AllQuestions[i]->AssociatedCountry == "Denmark") {
-			DenmarkQuestions.push_back(AllQuestions[i]);
-		}
-		if (AllQuestions[i]->AssociatedCountry == "Finland") {
-			FinlandQuestions.push_back(AllQuestions[i]);
-		}
-		if (AllQuestions[i]->AssociatedCountry == "Iceland") {
-			IcelandQuestions.push_back(AllQuestions[i]);
-		}
-	}
+	AllQuestions.Add(new FQuestion(
+		FText::FromString(TEXT("What is the main capital of Norway?")),
+		TArray<FText>{FText::FromString(TEXT("Bergen")), FText::FromString(TEXT("Oslo")), FText::FromString(TEXT("Trondheim")), FText::FromString(TEXT("Helsinki"))},
+		1,
+		FText::FromString(TEXT("Norway")),
+		FText::FromString(TEXT("That's right!")),
+		FText::FromString(TEXT("Sorry, that's not correct.")),
+		0,
+		false));
+	//for (int i = 0; i < AllQuestions.Num(); i++) {
+	//	if (AllQuestions[i]->AssociatedCountry.CompareTo(FText::FromString(TEXT("Norway")))) {
+	//		NorwayQuestions.Add(AllQuestions[i]);
+	//	}
+	//	if (AllQuestions[i]->AssociatedCountry.CompareTo(FText::FromString(TEXT("Sweden")))) {
+	//		SwedenQuestions.Add(AllQuestions[i]);
+	//	}
+	//	if (AllQuestions[i]->AssociatedCountry.CompareTo(FText::FromString(TEXT("Denmark")))) {
+	//		DenmarkQuestions.Add(AllQuestions[i]);
+	//	}
+	//	if (AllQuestions[i]->AssociatedCountry.CompareTo(FText::FromString(TEXT("Finland")))) {
+	//		FinlandQuestions.Add(AllQuestions[i]);
+	//	}
+	//	if (AllQuestions[i]->AssociatedCountry.CompareTo(FText::FromString(TEXT("Iceland")))) {
+	//		IcelandQuestions.Add(AllQuestions[i]);
+	//	}
+	//}
 }
 
 // Called every frame
@@ -40,5 +48,15 @@ void AQuestionsManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+FText AQuestionsManager::GetQuestionBody(int32 Index)
+{
+	return AllQuestions[Index]->QuestionBody;
+}
+
+FText AQuestionsManager::GetAnswerOption(int32 QuestionIndex, int32 AnswerIndex)
+{
+	return AllQuestions[QuestionIndex]->PossibleAnswers[AnswerIndex];
 }
 
