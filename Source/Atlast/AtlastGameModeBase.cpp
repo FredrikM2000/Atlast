@@ -74,6 +74,16 @@ bool AAtlastGameModeBase::AnswerQuestion(int32 Index, int32 Answer)
 	return static_cast<AQuestionsManager*>(QuestionsManager[0])->AnswerQuestion(Index, Answer);
 }
 
+bool AAtlastGameModeBase::CheckIfEndOfQuestions(int32 Index)
+{
+	return static_cast<AQuestionsManager*>(QuestionsManager[0])->CheckIfEndOfQuestions(Index);
+}
+
+int32 AAtlastGameModeBase::TotalQuestions()
+{
+	return static_cast<AQuestionsManager*>(QuestionsManager[0])->TotalQuestions();
+}
+
 void AAtlastGameModeBase::CountryClicked(ACountry* SelectedCountry, ALandmark* SelectedLandmark)
 {
 	for (int i = 0; i < AllCountries.Num(); i++) {

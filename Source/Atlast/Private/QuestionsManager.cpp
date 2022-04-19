@@ -18,7 +18,16 @@ void AQuestionsManager::BeginPlay()
 	AllQuestions.Add(new FQuestion(
 		FText::FromString(TEXT("What is the main capital of Norway?")),
 		TArray<FText>{FText::FromString(TEXT("Bergen")), FText::FromString(TEXT("Oslo")), FText::FromString(TEXT("Trondheim")), FText::FromString(TEXT("Helsinki"))},
-		1,
+		1, // Answers are 0, 1, 2, 3
+		FText::FromString(TEXT("Norway")),
+		FText::FromString(TEXT("That's right!")),
+		FText::FromString(TEXT("Sorry, that's not correct.")),
+		0,
+		false));
+	AllQuestions.Add(new FQuestion(
+		FText::FromString(TEXT("How much did the diving tower in Hamar end up costing?")),
+		TArray<FText>{FText::FromString(TEXT("1,5 million NOK / 170k USD")), FText::FromString(TEXT("3,0 million NOK / 340k USD")), FText::FromString(TEXT("4,5 million NOK / 500k USD")), FText::FromString(TEXT("25 million NOK / 2,5 million USD"))},
+		3,
 		FText::FromString(TEXT("Norway")),
 		FText::FromString(TEXT("That's right!")),
 		FText::FromString(TEXT("Sorry, that's not correct.")),
@@ -72,6 +81,20 @@ FText AQuestionsManager::GetQuestionWrong(int32 Index)
 
 bool AQuestionsManager::AnswerQuestion(int32 Index, int32 Answer)
 {
+	AllQuestions[Index]->HasSeenBefore = true;
+	if (AllQuestions[Index]->CorrectAnswer == Answer) {
+		AllQuestions[Index]->HasAnsweredCorrectBefore = true;
+	}
 	return (AllQuestions[Index]->CorrectAnswer == Answer);
+}
+
+bool AQuestionsManager::CheckIfEndOfQuestions(int32 Index)
+{
+	return Index >= AllQuestions.Num()-1;
+}
+
+int32 AQuestionsManager::TotalQuestions()
+{
+	return AllQuestions.Num();
 }
 

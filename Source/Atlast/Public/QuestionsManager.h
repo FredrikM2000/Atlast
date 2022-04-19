@@ -63,7 +63,7 @@ protected:
 	
 
 public:
-	TArray<FQuestion*> AllQuestions{ nullptr };
+	TArray<FQuestion*> AllQuestions;
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -73,4 +73,6 @@ public:
 	FText GetQuestionCorrect(int32 Index);
 	FText GetQuestionWrong(int32 Index);
 	bool AnswerQuestion(int32 Index, int32 Answer);
+	bool CheckIfEndOfQuestions(int32 Index);
+	int32 TotalQuestions();
 };

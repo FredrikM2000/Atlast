@@ -56,5 +56,11 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool AnswerQuestion(int32 Index, int32 Answer);
 
+	UFUNCTION(BlueprintCallable)
+	bool CheckIfEndOfQuestions(int32 Index);
+
+	UFUNCTION(BlueprintCallable)
+	int32 TotalQuestions();
+
 	void CountryClicked(class ACountry* SelectedCountry, class ALandmark* SelectedLandmark = nullptr);
 };
