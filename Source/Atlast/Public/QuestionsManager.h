@@ -64,10 +64,13 @@ protected:
 
 public:
 	TArray<FQuestion*> AllQuestions;
+	TArray<FQuestion*> QuestionPool{ nullptr };
+	TArray<FQuestion*> TempPool{ nullptr };
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void FillQuestionPool(int32 NumberOfQuestions, FText Country = FText::FromString(TEXT("None")), int32 MinDifficulty = 0, int32 MaxDifficulty = 10);
 	FText GetQuestionBody(int32 Index);
 	FText GetAnswerOption(int32 Index, int32 AnswerIndex);
 	FText GetQuestionCorrect(int32 Index);

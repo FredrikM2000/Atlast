@@ -2,6 +2,7 @@
 
 
 #include "QuestionsManager.h"
+#include <Math/UnrealMathUtility.h>
 
 // Sets default values
 AQuestionsManager::AQuestionsManager()
@@ -57,6 +58,33 @@ void AQuestionsManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void AQuestionsManager::FillQuestionPool(int32 NumberOfQuestions, FText Country, int32 MinDifficulty, int32 MaxDifficulty)
+{
+	QuestionPool.Empty();
+	TempPool.Empty();
+	for (int32 i = 0; i < AllQuestions.Num(); i++) {
+		if (!Country.CompareTo(FText::FromString(TEXT("None")))) {
+			if (Country.CompareTo(AllQuestions[i]->AssociatedCountry)) {
+				if (AllQuestions[i]->Difficulty >= MinDifficulty && AllQuestions[i]->Difficulty <= MaxDifficulty) {
+					TempPool.Add(AllQuestions[i]);
+				}
+			}
+		}
+		else {
+			if (AllQuestions[i]->Difficulty >= MinDifficulty && AllQuestions[i]->Difficulty <= MaxDifficulty) {
+				TempPool.Add(AllQuestions[i]);
+			}
+		}
+	}
+	if (TempPool.Num() < NumberOfQuestions) {
+
+		return;
+	}
+	for (int32 j = 0; j < NumberOfQuestions; j++) {
+		// Insert code for randomizing the order here
+	}
 }
 
 FText AQuestionsManager::GetQuestionBody(int32 Index)
