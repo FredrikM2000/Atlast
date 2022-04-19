@@ -59,6 +59,21 @@ FText AAtlastGameModeBase::GetAnswerOption(int32 QuestionIndex, int32 AnswerInde
 	return static_cast<AQuestionsManager*>(QuestionsManager[0])->GetAnswerOption(QuestionIndex, AnswerIndex);
 }
 
+FText AAtlastGameModeBase::GetQuestionCorrect(int32 Index)
+{
+	return static_cast<AQuestionsManager*>(QuestionsManager[0])->GetQuestionCorrect(Index);
+}
+
+FText AAtlastGameModeBase::GetQuestionWrong(int32 Index)
+{
+	return static_cast<AQuestionsManager*>(QuestionsManager[0])->GetQuestionWrong(Index);
+}
+
+bool AAtlastGameModeBase::AnswerQuestion(int32 Index, int32 Answer)
+{
+	return static_cast<AQuestionsManager*>(QuestionsManager[0])->AnswerQuestion(Index, Answer);
+}
+
 void AAtlastGameModeBase::CountryClicked(ACountry* SelectedCountry, ALandmark* SelectedLandmark)
 {
 	for (int i = 0; i < AllCountries.Num(); i++) {

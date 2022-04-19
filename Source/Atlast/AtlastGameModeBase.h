@@ -47,5 +47,14 @@ public:
 	UFUNCTION(BlueprintCallable)
 	FText GetAnswerOption(int32 QuestionIndex, int32 AnswerIndex);
 
+	UFUNCTION(BlueprintCallable)
+	FText GetQuestionCorrect(int32 Index);
+
+	UFUNCTION(BlueprintCallable)
+	FText GetQuestionWrong(int32 Index);
+
+	UFUNCTION(BlueprintCallable)
+	bool AnswerQuestion(int32 Index, int32 Answer);
+
 	void CountryClicked(class ACountry* SelectedCountry, class ALandmark* SelectedLandmark = nullptr);
 };

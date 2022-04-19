@@ -31,17 +31,6 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	TArray<FText> PossibleAnswers{ FText::FromString(TEXT("INSERT_QUESTION_ANSWERS_HERE")) };
 
-	UPROPERTY(BlueprintReadOnly)
-	FText Answer1 = FText::FromString(TEXT("INSERT_ANSWER1_HERE"));
-
-	UPROPERTY(BlueprintReadOnly)
-	FText Answer2 = FText::FromString(TEXT("INSERT_ANSWER2_HERE"));
-
-	UPROPERTY(BlueprintReadOnly)
-	FText Answer3 = FText::FromString(TEXT("INSERT_ANSWER3_HERE"));
-
-	UPROPERTY(BlueprintReadOnly)
-	FText Answer4 = FText::FromString(TEXT("INSERT_ANSWER4_HERE"));
 
 	bool IsLandmarkQuestion = false;
 	bool HasSeenBefore = false;
@@ -50,23 +39,12 @@ public:
 	FQuestion(FText Question, TArray<FText> Answers, int32 Correct, FText Country, FText Congrats, FText Sorry, int32 Challenge, bool LandmarkQuestion) {
 		QuestionBody = Question;
 		PossibleAnswers = Answers;
-		Answer1 = FText::FromString(TEXT("INSERT_ANSWER1_HERE"));
-		Answer2 = FText::FromString(TEXT("INSERT_ANSWER2_HERE"));
-		Answer3 = FText::FromString(TEXT("INSERT_ANSWER3_HERE"));
-		Answer4 = FText::FromString(TEXT("INSERT_ANSWER4_HERE"));
 		CorrectAnswer = Correct;
 		AssociatedCountry = Country;
 		IfCorrect = Congrats;
 		IfWrong = Sorry;
 		Difficulty = Challenge;
 		IsLandmarkQuestion = LandmarkQuestion;
-	}
-	void AnswerQuestion(int32 AnswerRecieved) {
-		if (AnswerRecieved == CorrectAnswer) {
-			HasAnsweredCorrectBefore = true;
-		}
-		else {
-		}
 	}
 };
 
@@ -92,4 +70,7 @@ public:
 
 	FText GetQuestionBody(int32 Index);
 	FText GetAnswerOption(int32 Index, int32 AnswerIndex);
+	FText GetQuestionCorrect(int32 Index);
+	FText GetQuestionWrong(int32 Index);
+	bool AnswerQuestion(int32 Index, int32 Answer);
 };

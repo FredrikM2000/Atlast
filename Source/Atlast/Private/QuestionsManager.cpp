@@ -60,3 +60,18 @@ FText AQuestionsManager::GetAnswerOption(int32 QuestionIndex, int32 AnswerIndex)
 	return AllQuestions[QuestionIndex]->PossibleAnswers[AnswerIndex];
 }
 
+FText AQuestionsManager::GetQuestionCorrect(int32 Index)
+{
+	return AllQuestions[Index]->IfCorrect;
+}
+
+FText AQuestionsManager::GetQuestionWrong(int32 Index)
+{
+	return AllQuestions[Index]->IfWrong;
+}
+
+bool AQuestionsManager::AnswerQuestion(int32 Index, int32 Answer)
+{
+	return (AllQuestions[Index]->CorrectAnswer == Answer);
+}
+
