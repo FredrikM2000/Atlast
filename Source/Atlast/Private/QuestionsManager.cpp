@@ -3,6 +3,7 @@
 
 #include "QuestionsManager.h"
 #include <Math/UnrealMathUtility.h>
+#include "Kismet/KismetArrayLibrary.h"
 
 // Sets default values
 AQuestionsManager::AQuestionsManager()
@@ -34,6 +35,15 @@ void AQuestionsManager::BeginPlay()
 		FText::FromString(TEXT("Sorry, that's not correct.")),
 		0,
 		false));
+	AllQuestions.Add(new FQuestion(
+		FText::FromString(TEXT("What psychological term was first used to refer to\nwhat happened during a bank robbery in Sweden in 1971?")),
+		TArray<FText>{FText::FromString(TEXT("Stockholm Syndrome:\nWhen captives develop sympathy for their captor.")), FText::FromString(TEXT("Malmo Madness:\nA murderous rage criminals enter when\nfaced with the threat of arrest.")), FText::FromString(TEXT("Helsingborg Honor:\nDangerous people acting extremely politely\ndespite doing horrible acts.")), FText::FromString(TEXT("Gothenburg Gall:\nWhen a criminal genuinely believes 'getting away'\nmeans they'll never be prosecuted."))},
+		3,
+		FText::FromString(TEXT("Sweden")),
+		FText::FromString(TEXT("That's right!")),
+		FText::FromString(TEXT("Sorry, that's not correct.")),
+		0,
+		false));
 	//for (int i = 0; i < AllQuestions.Num(); i++) {
 	//	if (AllQuestions[i]->AssociatedCountry.CompareTo(FText::FromString(TEXT("Norway")))) {
 	//		NorwayQuestions.Add(AllQuestions[i]);
@@ -51,6 +61,7 @@ void AQuestionsManager::BeginPlay()
 	//		IcelandQuestions.Add(AllQuestions[i]);
 	//	}
 	//}
+	FillQuestionPool(3);
 }
 
 // Called every frame
@@ -78,51 +89,61 @@ void AQuestionsManager::FillQuestionPool(int32 NumberOfQuestions, FText Country,
 			}
 		}
 	}
-	if (TempPool.Num() < NumberOfQuestions) {
 
-		return;
+	if (TempPool.Num() > 0)
+	{
+		int32 LastIndex = TempPool.Num() - 1;
+		for (int32 i = 0; i <= LastIndex; ++i)
+		{
+			int32 Index = FMath::RandRange(i, LastIndex);
+			if (i != Index)
+			{
+				TempPool.Swap(i, Index);
+			}
+		}
 	}
-	for (int32 j = 0; j < NumberOfQuestions; j++) {
-		// Insert code for randomizing the order here
+
+	for (int32 i = 0; i < TempPool.Num(); i++) {
+		QuestionPool.Add(TempPool[i]);
 	}
 }
 
 FText AQuestionsManager::GetQuestionBody(int32 Index)
 {
-	return AllQuestions[Index]->QuestionBody;
+	return QuestionPool[Index]->QuestionBody;
 }
 
 FText AQuestionsManager::GetAnswerOption(int32 QuestionIndex, int32 AnswerIndex)
 {
-	return AllQuestions[QuestionIndex]->PossibleAnswers[AnswerIndex];
+	return QuestionPool[QuestionIndex]->PossibleAnswers[AnswerIndex];
 }
 
 FText AQuestionsManager::GetQuestionCorrect(int32 Index)
 {
-	return AllQuestions[Index]->IfCorrect;
+	return QuestionPool[Index]->IfCorrect;
 }
 
 FText AQuestionsManager::GetQuestionWrong(int32 Index)
 {
-	return AllQuestions[Index]->IfWrong;
+	return QuestionPool[Index]->IfWrong;
 }
 
 bool AQuestionsManager::AnswerQuestion(int32 Index, int32 Answer)
 {
-	AllQuestions[Index]->HasSeenBefore = true;
-	if (AllQuestions[Index]->CorrectAnswer == Answer) {
-		AllQuestions[Index]->HasAnsweredCorrectBefore = true;
+	QuestionPool[Index]->HasSeenBefore = true;
+	if (QuestionPool[Index]->CorrectAnswer == Answer) {
+		QuestionPool[Index]->HasAnsweredCorrectBefore = true;
 	}
-	return (AllQuestions[Index]->CorrectAnswer == Answer);
+	return (QuestionPool[Index]->CorrectAnswer == Answer);
 }
 
 bool AQuestionsManager::CheckIfEndOfQuestions(int32 Index)
 {
-	return Index >= AllQuestions.Num()-1;
+	return Index >= QuestionPool.Num()-1;
 }
 
 int32 AQuestionsManager::TotalQuestions()
 {
-	return AllQuestions.Num();
+	return QuestionPool.Num();
 }
 
