@@ -11,9 +11,10 @@
 #include "Achievements.generated.h"
 
 USTRUCT(BlueprintType)
- struct FCoreAchievement {
+ struct FAchievement {
 	GENERATED_BODY()
 public:
+	FAchievement() {}
 	UPROPERTY(BlueprintReadOnly)
 	FText AchievementName = FText::FromString(TEXT("ACHIEVEMENT_NAME_HERE"));
 	UPROPERTY(BlueprintReadOnly)
@@ -27,18 +28,11 @@ public:
 		AchievementUnlocked = true;
 		UE_LOG(LogTemp, Warning, TEXT("Achievement unlocked!"));
 	}
-};
-
-USTRUCT(BlueprintType)
-struct FIncrementAchievement : public FCoreAchievement {
-	GENERATED_BODY()
-public:
 	UPROPERTY(BlueprintReadOnly)
-	int AchievementCurrentNumber = 0;
+		int AchievementCurrentNumber = 0;
 	UPROPERTY(BlueprintReadOnly)
-	int AchievementTargetNumber = 1;
-	FIncrementAchievement(){}
-	FIncrementAchievement(FText name, FText desc, int number, int target, FString type) {
+		int AchievementTargetNumber = 1;
+	FAchievement(FText name, FText desc, int number, int target, FString type) {
 		AchievementName = name;
 		AchievementDescription = desc;
 		AchievementNumber = number;
@@ -69,7 +63,7 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	TArray<FCoreAchievement*> AllAchievements;
+	TArray<FAchievement*> AllAchievements;
 
 	FText GetAchievementName(int32 Index);
 	FText GetAchievementDescription(int32 Index);

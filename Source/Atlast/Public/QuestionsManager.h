@@ -8,21 +8,35 @@
 #include "GameFramework/Actor.h"
 #include "QuestionsManager.generated.h"
 
-struct QuestionBase {
-	std::string AssociatedCountry = "INSERT_COUNTRY_HERE";
+USTRUCT(BlueprintType)
+struct FQuestion {
+	GENERATED_BODY()
+public:
+	FQuestion() {}
+	~FQuestion() {}
+	UPROPERTY(BlueprintReadOnly)
+	FText AssociatedCountry = FText::FromString(TEXT("INSERT_COUNTRY_HERE"));
+
 	int32 Difficulty = 0;
-	std::string QuestionBody = "INSERT_QUESTION_BODY_HERE";
-	std::string IfCorrect = "INSERT_ADDITIONAL_INFORMATION_HERE";
-	std::string IfWrong = "INSERT_WRONG_MESSAGE_HERE";
+
+	UPROPERTY(BlueprintReadOnly)
+	FText QuestionBody = FText::FromString(TEXT("INSERT_QUESTION_BODY_HERE"));
+
+	UPROPERTY(BlueprintReadOnly)
+	FText IfCorrect = FText::FromString(TEXT("INSERT_ADDITIONAL_INFORMATION_HERE"));
+
+	UPROPERTY(BlueprintReadOnly)
+	FText IfWrong = FText::FromString(TEXT("INSERT_WRONG_MESSAGE_HERE"));
+
+	UPROPERTY(BlueprintReadOnly)
+	TArray<FText> PossibleAnswers{ FText::FromString(TEXT("INSERT_QUESTION_ANSWERS_HERE")) };
+
+
 	bool IsLandmarkQuestion = false;
 	bool HasSeenBefore = false;
 	bool HasAnsweredCorrectBefore = false;
-};
-
-struct MultipleChoiceQuestion : QuestionBase {
-	std::vector<std::string> PossibleAnswers;
-	int32 CorrectAnswer;
-	MultipleChoiceQuestion(std::string Question, std::vector<std::string> Answers, int32 Correct, std::string Country, std::string Congrats, std::string Sorry, int32 Challenge, bool LandmarkQuestion) {
+	int32 CorrectAnswer = 0;
+	FQuestion(FText Question, TArray<FText> Answers, int32 Correct, FText Country, FText Congrats, FText Sorry, int32 Challenge, bool LandmarkQuestion) {
 		QuestionBody = Question;
 		PossibleAnswers = Answers;
 		CorrectAnswer = Correct;
@@ -31,14 +45,6 @@ struct MultipleChoiceQuestion : QuestionBase {
 		IfWrong = Sorry;
 		Difficulty = Challenge;
 		IsLandmarkQuestion = LandmarkQuestion;
-	}
-
-	void AnswerQuestion(int32 AnswerRecieved) {
-		if (AnswerRecieved == CorrectAnswer) {
-			HasAnsweredCorrectBefore = true;
-		}
-		else {
-		}
 	}
 };
 
@@ -54,15 +60,19 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	std::vector<QuestionBase*> AllQuestions;
-	std::vector<QuestionBase*> NorwayQuestions;
-	std::vector<QuestionBase*> SwedenQuestions;
-	std::vector<QuestionBase*> DenmarkQuestions;
-	std::vector<QuestionBase*> FinlandQuestions;
-	std::vector<QuestionBase*> IcelandQuestions;
+	
 
 public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	TArray<FQuestion*> AllQuestions;
+	TArray<FQuestion*> QuestionPool{ nullptr };
+	TArray<FQuestion*> TempPool{ nullptr };
 
+	void FillQuestionPool(int32 NumberOfQuestions, FText Country = FText::FromString(TEXT("None")), int32 MinDifficulty = 0, int32 MaxDifficulty = 10);
+	FText GetQuestionBody(int32 Index);
+	FText GetAnswerOption(int32 Index, int32 AnswerIndex);
+	FText GetQuestionCorrect(int32 Index);
+	FText GetQuestionWrong(int32 Index);
+	bool AnswerQuestion(int32 Index, int32 Answer);
+	bool CheckIfEndOfQuestions(int32 Index);
+	int32 TotalQuestions();
 };
