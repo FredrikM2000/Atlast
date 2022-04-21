@@ -15,7 +15,7 @@ AAchievements::AAchievements()
 void AAchievements::BeginPlay()
 {
 	Super::BeginPlay();
-	AllAchievements.Emplace(new FIncrementAchievement(FText::FromString(TEXT("Clicker 1")), FText::FromString(TEXT("Clicked 10 times.")), 1, 1000, FString(TEXT("Click Anywhere"))));
+	AllAchievements.Emplace(new FAchievement(FText::FromString(TEXT("Clicker 1")), FText::FromString(TEXT("Clicked 10 times.")), 1, 1000, FString(TEXT("Click Anywhere"))));
 }
 
 FText AAchievements::GetAchievementName(int32 Index)
@@ -30,8 +30,8 @@ FText AAchievements::GetAchievementDescription(int32 Index)
 
 float AAchievements::GetAchievementProgress(int32 Index)
 {
-	if (static_cast<FIncrementAchievement*>(AllAchievements[Index]) != nullptr) {
-		return ((float)(static_cast<FIncrementAchievement*>(AllAchievements[Index])->AchievementCurrentNumber) / (float)(static_cast<FIncrementAchievement*>(AllAchievements[Index])->AchievementTargetNumber));
+	if (AllAchievements[Index] != nullptr) {
+		return ((float)(AllAchievements[Index]->AchievementCurrentNumber) / (float)(AllAchievements[Index]->AchievementTargetNumber));
 	}
 	return 0.0f;
 }
@@ -47,7 +47,7 @@ void AAchievements::ClickAnywhere(int Clicks)
 {
 	for (int i = 0; i < AllAchievements.Num(); i++) {
 		if (AllAchievements[i]->AchievementType == "Click Anywhere") {
-			static_cast<FIncrementAchievement*>(AllAchievements[i])->IncrementNumber(Clicks);
+			AllAchievements[i]->IncrementNumber(Clicks);
 		}
 	}
 }

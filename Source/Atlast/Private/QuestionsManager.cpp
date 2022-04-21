@@ -9,7 +9,7 @@
 AQuestionsManager::AQuestionsManager()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 }
 
@@ -38,7 +38,7 @@ void AQuestionsManager::BeginPlay()
 	AllQuestions.Add(new FQuestion(
 		FText::FromString(TEXT("What psychological term was first used to refer to\nwhat happened during a bank robbery in Sweden in 1971?")),
 		TArray<FText>{FText::FromString(TEXT("Stockholm Syndrome:\nWhen captives develop sympathy for their captor.")), FText::FromString(TEXT("Malmo Madness:\nA murderous rage criminals enter when\nfaced with the threat of arrest.")), FText::FromString(TEXT("Helsingborg Honor:\nDangerous people acting extremely politely\ndespite doing horrible acts.")), FText::FromString(TEXT("Gothenburg Gall:\nWhen a criminal genuinely believes 'getting away'\nmeans they'll never be prosecuted."))},
-		3,
+		0,
 		FText::FromString(TEXT("Sweden")),
 		FText::FromString(TEXT("That's right!")),
 		FText::FromString(TEXT("Sorry, that's not correct.")),
@@ -61,14 +61,7 @@ void AQuestionsManager::BeginPlay()
 	//		IcelandQuestions.Add(AllQuestions[i]);
 	//	}
 	//}
-	FillQuestionPool(3);
-}
-
-// Called every frame
-void AQuestionsManager::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
+	FillQuestionPool(3, FText::FromString(TEXT("Norway")));
 }
 
 void AQuestionsManager::FillQuestionPool(int32 NumberOfQuestions, FText Country, int32 MinDifficulty, int32 MaxDifficulty)
@@ -76,17 +69,18 @@ void AQuestionsManager::FillQuestionPool(int32 NumberOfQuestions, FText Country,
 	QuestionPool.Empty();
 	TempPool.Empty();
 	for (int32 i = 0; i < AllQuestions.Num(); i++) {
-		if (!Country.CompareTo(FText::FromString(TEXT("None")))) {
-			if (Country.CompareTo(AllQuestions[i]->AssociatedCountry)) {
+		if (Country.EqualTo(FText::FromString(TEXT("None")))) {
 				if (AllQuestions[i]->Difficulty >= MinDifficulty && AllQuestions[i]->Difficulty <= MaxDifficulty) {
 					TempPool.Add(AllQuestions[i]);
+					UE_LOG(LogTemp, Warning, TEXT("Added country"));
 				}
-			}
 		}
 		else {
+		if (Country.EqualTo(AllQuestions[i]->AssociatedCountry)) {
 			if (AllQuestions[i]->Difficulty >= MinDifficulty && AllQuestions[i]->Difficulty <= MaxDifficulty) {
 				TempPool.Add(AllQuestions[i]);
 			}
+		}
 		}
 	}
 
@@ -99,12 +93,25 @@ void AQuestionsManager::FillQuestionPool(int32 NumberOfQuestions, FText Country,
 			if (i != Index)
 			{
 				TempPool.Swap(i, Index);
+				UE_LOG(LogTemp, Warning, TEXT("Shuffle"));
 			}
 		}
+	}
+	else {
+		QuestionPool.Add(new FQuestion(FText::FromString(TEXT("ERROR")),
+			TArray<FText>{FText::FromString(TEXT("ERROR")), FText::FromString(TEXT("ERROR")), FText::FromString(TEXT("ERROR")), FText::FromString(TEXT("ERROR"))},
+			0,
+			FText::FromString(TEXT("None")),
+			FText::FromString(TEXT("ERROR")),
+			FText::FromString(TEXT("ERROR")),
+			0,
+			false));
+		return;
 	}
 
 	for (int32 i = 0; i < TempPool.Num(); i++) {
 		QuestionPool.Add(TempPool[i]);
+		UE_LOG(LogTemp, Warning, TEXT("Adding"));
 	}
 }
 
