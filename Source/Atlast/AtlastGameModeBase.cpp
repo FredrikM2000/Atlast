@@ -6,6 +6,7 @@
 #include "QuestionsManager.h"
 #include "Country.h"
 #include "Landmark.h"
+#include "ProgressManager.h"
 #include "Kismet/GameplayStatics.h"
 
 AAtlastGameModeBase::AAtlastGameModeBase() {
@@ -19,6 +20,7 @@ void AAtlastGameModeBase::BeginPlay()
 	UGameplayStatics::GetAllActorsOfClass(this, AAchievements::StaticClass(), AchievementSystem);
 	UGameplayStatics::GetAllActorsOfClass(this, AQuestionsManager::StaticClass(), QuestionsManager);
 	UGameplayStatics::GetAllActorsOfClass(this, ACountry::StaticClass(), AllCountries);
+	UGameplayStatics::GetAllActorsOfClass(this, AProgressManager::StaticClass(), ProgressManager);
 }
 
 // Called every frame
@@ -84,21 +86,17 @@ int32 AAtlastGameModeBase::TotalQuestions()
 	return static_cast<AQuestionsManager*>(QuestionsManager[0])->TotalQuestions();
 }
 
-void AAtlastGameModeBase::CountryClicked(ACountry* SelectedCountry, ALandmark* SelectedLandmark)
+void AAtlastGameModeBase::IncreaseProgress(int64 increase)
 {
-	//for (int i = 0; i < AllCountries.Num(); i++) {
-	//	if (static_cast<ACountry*>(AllCountries[i]) != SelectedCountry) {
-	//		static_cast<ACountry*>(AllCountries[i])->Highlighted = false;
-	//	}
-	//}
-	//for (int i = 0; i < AllLandmarks.Num(); i++) {
-	//	if (SelectedLandmark) {
-	//		if (static_cast<ALandmark*>(AllLandmarks[i]) != SelectedLandmark) {
-	//			static_cast<ALandmark*>(AllLandmarks[i])->Highlighted = false;
-	//		}
-	//	}
-	//	else {
-	//		static_cast<ALandmark*>(AllLandmarks[i])->Highlighted = false;
-	//	}
-	//}
+	static_cast<AProgressManager*>(ProgressManager[0])->Increase(increase);
+}
+
+float AAtlastGameModeBase::CurrentProgress()
+{
+	return static_cast<AProgressManager*>(ProgressManager[0])->GetProgress();
+}
+
+void AAtlastGameModeBase::FillQuestionPool(int32 NumberOfQuestions, FText Country, int32 MinDifficulty, int32 MaxDifficulty)
+{
+	return static_cast<AQuestionsManager*>(QuestionsManager[0])->FillQuestionPool(NumberOfQuestions, Country, MinDifficulty, MaxDifficulty);
 }

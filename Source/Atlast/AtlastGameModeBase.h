@@ -23,6 +23,7 @@ protected:
 
 	TArray<AActor*> AchievementSystem;
 	TArray<AActor*> QuestionsManager;
+	TArray<AActor*> ProgressManager;
 	TArray<AActor*> AllCountries;
 	TArray<AActor*> AllLandmarks;
 
@@ -62,5 +63,12 @@ public:
 	UFUNCTION(BlueprintCallable)
 	int32 TotalQuestions();
 
-	void CountryClicked(class ACountry* SelectedCountry, class ALandmark* SelectedLandmark = nullptr);
+	UFUNCTION(BlueprintCallable)
+	void IncreaseProgress(int64 increase);
+
+	UFUNCTION(BlueprintCallable)
+	float CurrentProgress();
+
+	UFUNCTION(BlueprintCallable)
+	void FillQuestionPool(int32 NumberOfQuestions, FText Country = INVTEXT("None"), int32 MinDifficulty = 0, int32 MaxDifficulty = 10);
 };

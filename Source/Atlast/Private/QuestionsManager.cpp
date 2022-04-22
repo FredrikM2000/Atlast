@@ -61,7 +61,7 @@ void AQuestionsManager::BeginPlay()
 	//		IcelandQuestions.Add(AllQuestions[i]);
 	//	}
 	//}
-	FillQuestionPool(3, FText::FromString(TEXT("Norway")));
+	//FillQuestionPool(3, FText::FromString(TEXT("Norway")));
 }
 
 void AQuestionsManager::FillQuestionPool(int32 NumberOfQuestions, FText Country, int32 MinDifficulty, int32 MaxDifficulty)
@@ -72,7 +72,6 @@ void AQuestionsManager::FillQuestionPool(int32 NumberOfQuestions, FText Country,
 		if (Country.EqualTo(FText::FromString(TEXT("None")))) {
 				if (AllQuestions[i]->Difficulty >= MinDifficulty && AllQuestions[i]->Difficulty <= MaxDifficulty) {
 					TempPool.Add(AllQuestions[i]);
-					UE_LOG(LogTemp, Warning, TEXT("Added country"));
 				}
 		}
 		else {
@@ -93,7 +92,6 @@ void AQuestionsManager::FillQuestionPool(int32 NumberOfQuestions, FText Country,
 			if (i != Index)
 			{
 				TempPool.Swap(i, Index);
-				UE_LOG(LogTemp, Warning, TEXT("Shuffle"));
 			}
 		}
 	}
@@ -108,10 +106,15 @@ void AQuestionsManager::FillQuestionPool(int32 NumberOfQuestions, FText Country,
 			false));
 		return;
 	}
-
-	for (int32 i = 0; i < TempPool.Num(); i++) {
-		QuestionPool.Add(TempPool[i]);
-		UE_LOG(LogTemp, Warning, TEXT("Adding"));
+	if (TempPool.Num() < NumberOfQuestions) {
+		for (int32 i = 0; i < TempPool.Num(); i++) {
+			QuestionPool.Add(TempPool[i]);
+		}
+	}
+	else {
+		for (int32 i = 0; i < NumberOfQuestions; i++) {
+			QuestionPool.Add(TempPool[i]);
+		}
 	}
 }
 
