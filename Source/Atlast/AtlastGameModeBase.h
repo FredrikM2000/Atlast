@@ -70,5 +70,5 @@ public:
 	float CurrentProgress();
 
 	UFUNCTION(BlueprintCallable)
-	void FillQuestionPool(int32 NumberOfQuestions, FText Country = INVTEXT("None"), int32 MinDifficulty = 0, int32 MaxDifficulty = 10);
+	void FillQuestionPool(int32 NumberOfQuestions, FText Landmark = INVTEXT("None"));
 };

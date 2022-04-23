@@ -22,28 +22,28 @@ void AQuestionsManager::BeginPlay()
 		TArray<FText>{FText::FromString(TEXT("Bergen")), FText::FromString(TEXT("Oslo")), FText::FromString(TEXT("Trondheim")), FText::FromString(TEXT("Helsinki"))},
 		1, // Answers are 0, 1, 2, 3
 		FText::FromString(TEXT("Norway")),
+		FText::FromString(TEXT("NorOpera")), // Norwegian Opera
 		FText::FromString(TEXT("That's right!")),
-		FText::FromString(TEXT("Sorry, that's not correct.")),
-		0,
-		false));
+		FText::FromString(TEXT("Sorry, that's not correct."))
+	));
 	AllQuestions.Add(new FQuestion(
 		FText::FromString(TEXT("How much did the diving tower in Hamar end up costing?")),
 		TArray<FText>{FText::FromString(TEXT("1,5 million NOK / 170k USD")), FText::FromString(TEXT("3,0 million NOK / 340k USD")), FText::FromString(TEXT("4,5 million NOK / 500k USD")), FText::FromString(TEXT("25 million NOK / 2,5 million USD"))},
 		3,
 		FText::FromString(TEXT("Norway")),
+		FText::FromString(TEXT("NorOpera")),
 		FText::FromString(TEXT("That's right!")),
-		FText::FromString(TEXT("Sorry, that's not correct.")),
-		0,
-		false));
+		FText::FromString(TEXT("Sorry, that's not correct."))
+		));
 	AllQuestions.Add(new FQuestion(
 		FText::FromString(TEXT("What psychological term was first used to refer to\nwhat happened during a bank robbery in Sweden in 1971?")),
 		TArray<FText>{FText::FromString(TEXT("Stockholm Syndrome:\nWhen captives develop sympathy for their captor.")), FText::FromString(TEXT("Malmo Madness:\nA murderous rage criminals enter when\nfaced with the threat of arrest.")), FText::FromString(TEXT("Helsingborg Honor:\nDangerous people acting extremely politely\ndespite doing horrible acts.")), FText::FromString(TEXT("Gothenburg Gall:\nWhen a criminal genuinely believes 'getting away'\nmeans they'll never be prosecuted."))},
 		0,
 		FText::FromString(TEXT("Sweden")),
+		FText::FromString(TEXT("SweSolar")), // Sweden Solar System
 		FText::FromString(TEXT("That's right!")),
-		FText::FromString(TEXT("Sorry, that's not correct.")),
-		0,
-		false));
+		FText::FromString(TEXT("Sorry, that's not correct."))
+	));
 	//for (int i = 0; i < AllQuestions.Num(); i++) {
 	//	if (AllQuestions[i]->AssociatedCountry.CompareTo(FText::FromString(TEXT("Norway")))) {
 	//		NorwayQuestions.Add(AllQuestions[i]);
@@ -64,22 +64,18 @@ void AQuestionsManager::BeginPlay()
 	//FillQuestionPool(3, FText::FromString(TEXT("Norway")));
 }
 
-void AQuestionsManager::FillQuestionPool(int32 NumberOfQuestions, FText Country, int32 MinDifficulty, int32 MaxDifficulty)
+void AQuestionsManager::FillQuestionPool(int32 NumberOfQuestions, FText Landmark)
 {
 	QuestionPool.Empty();
 	TempPool.Empty();
 	for (int32 i = 0; i < AllQuestions.Num(); i++) {
-		if (Country.EqualTo(FText::FromString(TEXT("None")))) {
-				if (AllQuestions[i]->Difficulty >= MinDifficulty && AllQuestions[i]->Difficulty <= MaxDifficulty) {
-					TempPool.Add(AllQuestions[i]);
-				}
+		if (Landmark.EqualTo(FText::FromString(TEXT("None")))) {
+			TempPool.Add(AllQuestions[i]);
 		}
 		else {
-		if (Country.EqualTo(AllQuestions[i]->AssociatedCountry)) {
-			if (AllQuestions[i]->Difficulty >= MinDifficulty && AllQuestions[i]->Difficulty <= MaxDifficulty) {
+			if (Landmark.EqualTo(AllQuestions[i]->AssociatedLandmark)) {
 				TempPool.Add(AllQuestions[i]);
 			}
-		}
 		}
 	}
 
@@ -100,10 +96,10 @@ void AQuestionsManager::FillQuestionPool(int32 NumberOfQuestions, FText Country,
 			TArray<FText>{FText::FromString(TEXT("ERROR")), FText::FromString(TEXT("ERROR")), FText::FromString(TEXT("ERROR")), FText::FromString(TEXT("ERROR"))},
 			0,
 			FText::FromString(TEXT("None")),
+			FText::FromString(TEXT("None")),
 			FText::FromString(TEXT("ERROR")),
-			FText::FromString(TEXT("ERROR")),
-			0,
-			false));
+			FText::FromString(TEXT("ERROR"))
+		));
 		return;
 	}
 	if (TempPool.Num() < NumberOfQuestions) {

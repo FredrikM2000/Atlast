@@ -17,7 +17,8 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	FText AssociatedCountry = FText::FromString(TEXT("INSERT_COUNTRY_HERE"));
 
-	int32 Difficulty = 0;
+	UPROPERTY(BlueprintReadOnly)
+	FText AssociatedLandmark = FText::FromString(TEXT("INSERT_COUNTRY_HERE"));
 
 	UPROPERTY(BlueprintReadOnly)
 	FText QuestionBody = FText::FromString(TEXT("INSERT_QUESTION_BODY_HERE"));
@@ -31,20 +32,17 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	TArray<FText> PossibleAnswers{ FText::FromString(TEXT("INSERT_QUESTION_ANSWERS_HERE")) };
 
-
-	bool IsLandmarkQuestion = false;
 	bool HasSeenBefore = false;
 	bool HasAnsweredCorrectBefore = false;
 	int32 CorrectAnswer = 0;
-	FQuestion(FText Question, TArray<FText> Answers, int32 Correct, FText Country, FText Congrats, FText Sorry, int32 Challenge, bool LandmarkQuestion) {
+	FQuestion(FText Question, TArray<FText> Answers, int32 Correct, FText Country, FText Landmark, FText Congrats, FText Sorry) {
 		QuestionBody = Question;
 		PossibleAnswers = Answers;
 		CorrectAnswer = Correct;
 		AssociatedCountry = Country;
+		AssociatedLandmark = Landmark;
 		IfCorrect = Congrats;
 		IfWrong = Sorry;
-		Difficulty = Challenge;
-		IsLandmarkQuestion = LandmarkQuestion;
 	}
 };
 
@@ -67,7 +65,7 @@ public:
 	TArray<FQuestion*> QuestionPool{ nullptr };
 	TArray<FQuestion*> TempPool{ nullptr };
 
-	void FillQuestionPool(int32 NumberOfQuestions, FText Country = FText::FromString(TEXT("None")), int32 MinDifficulty = 0, int32 MaxDifficulty = 10);
+	void FillQuestionPool(int32 NumberOfQuestions, FText Landmark = FText::FromString(TEXT("None")));
 	FText GetQuestionBody(int32 Index);
 	FText GetAnswerOption(int32 Index, int32 AnswerIndex);
 	FText GetQuestionCorrect(int32 Index);
