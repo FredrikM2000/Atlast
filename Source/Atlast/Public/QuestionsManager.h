@@ -65,7 +65,7 @@ public:
 	TArray<FQuestion*> QuestionPool{ nullptr };
 	TArray<FQuestion*> TempPool{ nullptr };
 
-	void FillQuestionPool(int32 NumberOfQuestions, FText Landmark = FText::FromString(TEXT("None")));
+	void FillQuestionPool(FText Landmark = FText::FromString(TEXT("None")));
 	FText GetQuestionBody(int32 Index);
 	FText GetAnswerOption(int32 Index, int32 AnswerIndex);
 	FText GetQuestionCorrect(int32 Index);

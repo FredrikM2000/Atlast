@@ -7,6 +7,7 @@
 #include "Internationalization/Text.h"
 #include "AtlastGameModeBase.generated.h"
 
+class AQuestionsManager;
 /**
  * 
  */
@@ -70,5 +71,8 @@ public:
 	float CurrentProgress();
 
 	UFUNCTION(BlueprintCallable)
-	void FillQuestionPool(int32 NumberOfQuestions, FText Landmark = INVTEXT("None"));
+	void FillQuestionPool(FText Landmark = INVTEXT("None"));
+
+	UFUNCTION(BlueprintCallable)
+	AQuestionsManager* GetQuestionManager();
 };

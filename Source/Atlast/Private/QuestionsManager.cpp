@@ -44,27 +44,45 @@ void AQuestionsManager::BeginPlay()
 		FText::FromString(TEXT("That's right!")),
 		FText::FromString(TEXT("Sorry, that's not correct."))
 	));
-	//for (int i = 0; i < AllQuestions.Num(); i++) {
-	//	if (AllQuestions[i]->AssociatedCountry.CompareTo(FText::FromString(TEXT("Norway")))) {
-	//		NorwayQuestions.Add(AllQuestions[i]);
-	//	}
-	//	if (AllQuestions[i]->AssociatedCountry.CompareTo(FText::FromString(TEXT("Sweden")))) {
-	//		SwedenQuestions.Add(AllQuestions[i]);
-	//	}
-	//	if (AllQuestions[i]->AssociatedCountry.CompareTo(FText::FromString(TEXT("Denmark")))) {
-	//		DenmarkQuestions.Add(AllQuestions[i]);
-	//	}
-	//	if (AllQuestions[i]->AssociatedCountry.CompareTo(FText::FromString(TEXT("Finland")))) {
-	//		FinlandQuestions.Add(AllQuestions[i]);
-	//	}
-	//	if (AllQuestions[i]->AssociatedCountry.CompareTo(FText::FromString(TEXT("Iceland")))) {
-	//		IcelandQuestions.Add(AllQuestions[i]);
-	//	}
-	//}
-	//FillQuestionPool(3, FText::FromString(TEXT("Norway")));
+		AllQuestions.Add(new FQuestion(
+		FText::FromString(TEXT("TEST1")),
+		TArray<FText>{FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST"))},
+		0,
+		FText::FromString(TEXT("Sweden")),
+		FText::FromString(TEXT("SweSolar")), // Sweden Solar System
+		FText::FromString(TEXT("That's right!")),
+		FText::FromString(TEXT("Sorry, that's not correct."))
+	));
+		AllQuestions.Add(new FQuestion(
+			FText::FromString(TEXT("TEST2")),
+			TArray<FText>{FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST"))},
+			0,
+			FText::FromString(TEXT("Denmark")),
+			FText::FromString(TEXT("LegoLand")),
+			FText::FromString(TEXT("That's right!")),
+			FText::FromString(TEXT("Sorry, that's not correct."))
+		));
+		AllQuestions.Add(new FQuestion(
+			FText::FromString(TEXT("TEST3")),
+			TArray<FText>{FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST"))},
+			0,
+			FText::FromString(TEXT("Finland")),
+			FText::FromString(TEXT("FinandThing")),
+			FText::FromString(TEXT("That's right!")),
+			FText::FromString(TEXT("Sorry, that's not correct."))
+		));
+		AllQuestions.Add(new FQuestion(
+			FText::FromString(TEXT("TEST4")),
+			TArray<FText>{FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST"))},
+			0,
+			FText::FromString(TEXT("Iceland")),
+			FText::FromString(TEXT("Iceland")),
+			FText::FromString(TEXT("That's right!")),
+			FText::FromString(TEXT("Sorry, that's not correct."))
+		));
 }
 
-void AQuestionsManager::FillQuestionPool(int32 NumberOfQuestions, FText Landmark)
+void AQuestionsManager::FillQuestionPool(FText Landmark)
 {
 	QuestionPool.Empty();
 	TempPool.Empty();
@@ -102,15 +120,8 @@ void AQuestionsManager::FillQuestionPool(int32 NumberOfQuestions, FText Landmark
 		));
 		return;
 	}
-	if (TempPool.Num() < NumberOfQuestions) {
-		for (int32 i = 0; i < TempPool.Num(); i++) {
-			QuestionPool.Add(TempPool[i]);
-		}
-	}
-	else {
-		for (int32 i = 0; i < NumberOfQuestions; i++) {
-			QuestionPool.Add(TempPool[i]);
-		}
+	for (int32 i = 0; i < TempPool.Num(); i++) {
+		QuestionPool.Add(TempPool[i]);
 	}
 }
 

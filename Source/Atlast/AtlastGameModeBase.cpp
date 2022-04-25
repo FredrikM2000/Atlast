@@ -96,7 +96,12 @@ float AAtlastGameModeBase::CurrentProgress()
 	return static_cast<AProgressManager*>(ProgressManager[0])->GetProgress();
 }
 
-void AAtlastGameModeBase::FillQuestionPool(int32 NumberOfQuestions, FText Landmark)
+void AAtlastGameModeBase::FillQuestionPool(FText Landmark)
 {
-	return static_cast<AQuestionsManager*>(QuestionsManager[0])->FillQuestionPool(NumberOfQuestions, Landmark);
+	return static_cast<AQuestionsManager*>(QuestionsManager[0])->FillQuestionPool(Landmark);
+}
+
+AQuestionsManager* AAtlastGameModeBase::GetQuestionManager()
+{
+	return static_cast<AQuestionsManager*>(QuestionsManager[0]);
 }
