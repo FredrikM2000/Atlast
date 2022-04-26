@@ -26,4 +26,7 @@ public:
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 		UStaticMeshComponent* Land;
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Information")
+	FText Name;
 };
