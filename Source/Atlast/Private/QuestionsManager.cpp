@@ -17,12 +17,13 @@ AQuestionsManager::AQuestionsManager()
 void AQuestionsManager::BeginPlay()
 {
 	Super::BeginPlay();
+	// Oslo Opera (Norway)
 	AllQuestions.Add(new FQuestion(
 		FText::FromString(TEXT("What is the main capital of Norway?")),
 		TArray<FText>{FText::FromString(TEXT("Bergen")), FText::FromString(TEXT("Oslo")), FText::FromString(TEXT("Trondheim")), FText::FromString(TEXT("Helsinki"))},
 		1, // Answers are 0, 1, 2, 3
 		FText::FromString(TEXT("Norway")),
-		FText::FromString(TEXT("NorOpera")), // Norwegian Opera
+		FText::FromString(TEXT("NorOpera")),
 		FText::FromString(TEXT("That's right!")),
 		FText::FromString(TEXT("Sorry, that's not correct."))
 	));
@@ -34,52 +35,177 @@ void AQuestionsManager::BeginPlay()
 		FText::FromString(TEXT("NorOpera")),
 		FText::FromString(TEXT("That's right!")),
 		FText::FromString(TEXT("Sorry, that's not correct."))
-		));
+	));
+	AllQuestions.Add(new FQuestion(
+		FText::FromString(TEXT("What is the main capital of Norway?")),
+		TArray<FText>{FText::FromString(TEXT("Bergen")), FText::FromString(TEXT("Oslo")), FText::FromString(TEXT("Trondheim")), FText::FromString(TEXT("Helsinki"))},
+		1, // Answers are 0, 1, 2, 3
+		FText::FromString(TEXT("Norway")),
+		FText::FromString(TEXT("NorOpera")),
+		FText::FromString(TEXT("That's right!")),
+		FText::FromString(TEXT("Sorry, that's not correct."))
+	));
+	AllQuestions.Add(new FQuestion(
+		FText::FromString(TEXT("What is the main capital of Norway?")),
+		TArray<FText>{FText::FromString(TEXT("Bergen")), FText::FromString(TEXT("Oslo")), FText::FromString(TEXT("Trondheim")), FText::FromString(TEXT("Helsinki"))},
+		1, // Answers are 0, 1, 2, 3
+		FText::FromString(TEXT("Norway")),
+		FText::FromString(TEXT("NorOpera")),
+		FText::FromString(TEXT("That's right!")),
+		FText::FromString(TEXT("Sorry, that's not correct."))
+	));
+
+	// Turning Torso (Sweden)
 	AllQuestions.Add(new FQuestion(
 		FText::FromString(TEXT("What psychological term was first used to refer to\nwhat happened during a bank robbery in Sweden in 1971?")),
 		TArray<FText>{FText::FromString(TEXT("Stockholm Syndrome:\nWhen captives develop sympathy for their captor.")), FText::FromString(TEXT("Malmo Madness:\nA murderous rage criminals enter when\nfaced with the threat of arrest.")), FText::FromString(TEXT("Helsingborg Honor:\nDangerous people acting extremely politely\ndespite doing horrible acts.")), FText::FromString(TEXT("Gothenburg Gall:\nWhen a criminal genuinely believes 'getting away'\nmeans they'll never be prosecuted."))},
 		0,
 		FText::FromString(TEXT("Sweden")),
-		FText::FromString(TEXT("SweSolar")), // Sweden Solar System
+		FText::FromString(TEXT("SweTorso")),
 		FText::FromString(TEXT("That's right!")),
 		FText::FromString(TEXT("Sorry, that's not correct."))
 	));
-		AllQuestions.Add(new FQuestion(
-		FText::FromString(TEXT("TEST1")),
-		TArray<FText>{FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST"))},
+	AllQuestions.Add(new FQuestion(
+		FText::FromString(TEXT("What psychological term was first used to refer to\nwhat happened during a bank robbery in Sweden in 1971?")),
+		TArray<FText>{FText::FromString(TEXT("Stockholm Syndrome:\nWhen captives develop sympathy for their captor.")), FText::FromString(TEXT("Malmo Madness:\nA murderous rage criminals enter when\nfaced with the threat of arrest.")), FText::FromString(TEXT("Helsingborg Honor:\nDangerous people acting extremely politely\ndespite doing horrible acts.")), FText::FromString(TEXT("Gothenburg Gall:\nWhen a criminal genuinely believes 'getting away'\nmeans they'll never be prosecuted."))},
 		0,
 		FText::FromString(TEXT("Sweden")),
-		FText::FromString(TEXT("SweSolar")), // Sweden Solar System
+		FText::FromString(TEXT("SweTorso")),
 		FText::FromString(TEXT("That's right!")),
 		FText::FromString(TEXT("Sorry, that's not correct."))
 	));
-		AllQuestions.Add(new FQuestion(
-			FText::FromString(TEXT("TEST2")),
-			TArray<FText>{FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST"))},
-			0,
-			FText::FromString(TEXT("Denmark")),
-			FText::FromString(TEXT("LegoLand")),
-			FText::FromString(TEXT("That's right!")),
-			FText::FromString(TEXT("Sorry, that's not correct."))
-		));
-		AllQuestions.Add(new FQuestion(
-			FText::FromString(TEXT("TEST3")),
-			TArray<FText>{FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST"))},
-			0,
-			FText::FromString(TEXT("Finland")),
-			FText::FromString(TEXT("FinandThing")),
-			FText::FromString(TEXT("That's right!")),
-			FText::FromString(TEXT("Sorry, that's not correct."))
-		));
-		AllQuestions.Add(new FQuestion(
-			FText::FromString(TEXT("TEST4")),
-			TArray<FText>{FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST")), FText::FromString(TEXT("TEST"))},
-			0,
-			FText::FromString(TEXT("Iceland")),
-			FText::FromString(TEXT("Iceland")),
-			FText::FromString(TEXT("That's right!")),
-			FText::FromString(TEXT("Sorry, that's not correct."))
-		));
+	AllQuestions.Add(new FQuestion(
+		FText::FromString(TEXT("What psychological term was first used to refer to\nwhat happened during a bank robbery in Sweden in 1971?")),
+		TArray<FText>{FText::FromString(TEXT("Stockholm Syndrome:\nWhen captives develop sympathy for their captor.")), FText::FromString(TEXT("Malmo Madness:\nA murderous rage criminals enter when\nfaced with the threat of arrest.")), FText::FromString(TEXT("Helsingborg Honor:\nDangerous people acting extremely politely\ndespite doing horrible acts.")), FText::FromString(TEXT("Gothenburg Gall:\nWhen a criminal genuinely believes 'getting away'\nmeans they'll never be prosecuted."))},
+		0,
+		FText::FromString(TEXT("Sweden")),
+		FText::FromString(TEXT("SweTorso")),
+		FText::FromString(TEXT("That's right!")),
+		FText::FromString(TEXT("Sorry, that's not correct."))
+	));
+	AllQuestions.Add(new FQuestion(
+		FText::FromString(TEXT("What psychological term was first used to refer to\nwhat happened during a bank robbery in Sweden in 1971?")),
+		TArray<FText>{FText::FromString(TEXT("Stockholm Syndrome:\nWhen captives develop sympathy for their captor.")), FText::FromString(TEXT("Malmo Madness:\nA murderous rage criminals enter when\nfaced with the threat of arrest.")), FText::FromString(TEXT("Helsingborg Honor:\nDangerous people acting extremely politely\ndespite doing horrible acts.")), FText::FromString(TEXT("Gothenburg Gall:\nWhen a criminal genuinely believes 'getting away'\nmeans they'll never be prosecuted."))},
+		0,
+		FText::FromString(TEXT("Sweden")),
+		FText::FromString(TEXT("SweTorso")),
+		FText::FromString(TEXT("That's right!")),
+		FText::FromString(TEXT("Sorry, that's not correct."))
+	));
+
+	// Legoland (Denmark)
+	AllQuestions.Add(new FQuestion(
+		FText::FromString(TEXT("Empty")),
+		TArray<FText>{FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None"))},
+		0,
+		FText::FromString(TEXT("Denmark")),
+		FText::FromString(TEXT("DenLego")),
+		FText::FromString(TEXT("That's right!")),
+		FText::FromString(TEXT("Sorry, that's not correct."))
+	));
+	AllQuestions.Add(new FQuestion(
+		FText::FromString(TEXT("Empty")),
+		TArray<FText>{FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None"))},
+		0,
+		FText::FromString(TEXT("Denmark")),
+		FText::FromString(TEXT("DenLego")),
+		FText::FromString(TEXT("That's right!")),
+		FText::FromString(TEXT("Sorry, that's not correct."))
+	));
+	AllQuestions.Add(new FQuestion(
+		FText::FromString(TEXT("Empty")),
+		TArray<FText>{FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None"))},
+		0,
+		FText::FromString(TEXT("Denmark")),
+		FText::FromString(TEXT("DenLego")),
+		FText::FromString(TEXT("That's right!")),
+		FText::FromString(TEXT("Sorry, that's not correct."))
+	));
+	AllQuestions.Add(new FQuestion(
+		FText::FromString(TEXT("Empty")),
+		TArray<FText>{FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None"))},
+		0,
+		FText::FromString(TEXT("Denmark")),
+		FText::FromString(TEXT("DenLego")),
+		FText::FromString(TEXT("That's right!")),
+		FText::FromString(TEXT("Sorry, that's not correct."))
+	));
+
+	// Kemi SnowCastle (Finland)
+	AllQuestions.Add(new FQuestion(
+		FText::FromString(TEXT("Empty")),
+		TArray<FText>{FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None"))},
+		0,
+		FText::FromString(TEXT("Finland")),
+		FText::FromString(TEXT("FinSnow")),
+		FText::FromString(TEXT("That's right!")),
+		FText::FromString(TEXT("Sorry, that's not correct."))
+	));
+	AllQuestions.Add(new FQuestion(
+		FText::FromString(TEXT("Empty")),
+		TArray<FText>{FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None"))},
+		0,
+		FText::FromString(TEXT("Finland")),
+		FText::FromString(TEXT("FinSnow")),
+		FText::FromString(TEXT("That's right!")),
+		FText::FromString(TEXT("Sorry, that's not correct."))
+	));
+	AllQuestions.Add(new FQuestion(
+		FText::FromString(TEXT("Empty")),
+		TArray<FText>{FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None"))},
+		0,
+		FText::FromString(TEXT("Finland")),
+		FText::FromString(TEXT("FinSnow")),
+		FText::FromString(TEXT("That's right!")),
+		FText::FromString(TEXT("Sorry, that's not correct."))
+	));
+	AllQuestions.Add(new FQuestion(
+		FText::FromString(TEXT("Empty")),
+		TArray<FText>{FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None"))},
+		0,
+		FText::FromString(TEXT("Finland")),
+		FText::FromString(TEXT("FinSnow")),
+		FText::FromString(TEXT("That's right!")),
+		FText::FromString(TEXT("Sorry, that's not correct."))
+	));
+
+	// Geysir (Iceland)
+	AllQuestions.Add(new FQuestion(
+		FText::FromString(TEXT("Empty")),
+		TArray<FText>{FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None"))},
+		0,
+		FText::FromString(TEXT("Iceland")),
+		FText::FromString(TEXT("IceLand")),
+		FText::FromString(TEXT("That's right!")),
+		FText::FromString(TEXT("Sorry, that's not correct."))
+	));
+	AllQuestions.Add(new FQuestion(
+		FText::FromString(TEXT("Empty")),
+		TArray<FText>{FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None"))},
+		0,
+		FText::FromString(TEXT("Iceland")),
+		FText::FromString(TEXT("IceLand")),
+		FText::FromString(TEXT("That's right!")),
+		FText::FromString(TEXT("Sorry, that's not correct."))
+	));
+	AllQuestions.Add(new FQuestion(
+		FText::FromString(TEXT("Empty")),
+		TArray<FText>{FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None"))},
+		0,
+		FText::FromString(TEXT("Iceland")),
+		FText::FromString(TEXT("IceLand")),
+		FText::FromString(TEXT("That's right!")),
+		FText::FromString(TEXT("Sorry, that's not correct."))
+	));
+	AllQuestions.Add(new FQuestion(
+		FText::FromString(TEXT("Empty")),
+		TArray<FText>{FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None")), FText::FromString(TEXT("None"))},
+		0,
+		FText::FromString(TEXT("Iceland")),
+		FText::FromString(TEXT("IceLand")),
+		FText::FromString(TEXT("That's right!")),
+		FText::FromString(TEXT("Sorry, that's not correct."))
+	));
 }
 
 void AQuestionsManager::FillQuestionPool(FText Landmark)
