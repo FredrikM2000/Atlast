@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/Image.h"
+//#include "Components/Image.h"
 #include "Country.h"
 #include "GameFramework/Actor.h"
 #include "Landmark.generated.h"
@@ -26,21 +26,20 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(EditAnywhere, Category = "Information")
-	FString Name;
+	FText Name;
 	UPROPERTY(EditAnywhere, Category = "Information")
-	FString Description;
+	FText InternalName;
+	UPROPERTY(EditAnywhere, Category = "Information")
+	FText Description;
 //	UPROPERTY(EditAnywhere, Category = "Information")
 //	class UImage* Photo;
 	UPROPERTY(EditAnywhere, Category = "Information")
 	ACountry* AssociatedCountry{ nullptr };
 
-	void Clicked();
-	bool Highlighted = false;
+	UFUNCTION(BlueprintCallable)
+	void ActivateQuiz();
 
 private:
-	//UPROPERTY(VisibleAnywhere)
-	//UStaticMeshComponent* BaseMesh;
-
 	bool CountryHighlighted = false;
 
 };
