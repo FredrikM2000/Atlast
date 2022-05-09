@@ -25,15 +25,15 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere, Category = "Information")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Information")
 	FText Name;
-	UPROPERTY(EditAnywhere, Category = "Information")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Information")
 	FText InternalName;
-	UPROPERTY(EditAnywhere, Category = "Information")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Information")
 	FText Description;
 //	UPROPERTY(EditAnywhere, Category = "Information")
 //	class UImage* Photo;
-	UPROPERTY(EditAnywhere, Category = "Information")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Information")
 	ACountry* AssociatedCountry{ nullptr };
 
 	UFUNCTION(BlueprintCallable)
